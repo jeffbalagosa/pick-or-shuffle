@@ -12,28 +12,61 @@
     />
   </head>
   <body>
-    <header><h1>Pick or Shuffle</h1></header>
-    <main>
+    <header><h1 class="text-center">Pick or Shuffle</h1></header>
+    <main class="d-flex flex-row justify-content-center">
+      <!-- Output Card -->
       <div class="card" style="width: 18rem">
-        <img src="..." class="card-img-top" alt="..." />
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
+          <h5 class="card-title">Output</h5>
           <p class="card-text">
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
+      <!-- Input Card -->
       <div class="card" style="width: 18rem">
-        <img src="..." class="card-img-top" alt="..." />
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
+          <h5 class="card-title">Input</h5>
           <p class="card-text">
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault2"
+              checked
+            />
+            <label class="form-check-label" for="flexRadioDefault2">
+              Shuffle Mode
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault1"
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              Picker Mode
+            </label>
+          </div>
+          <div class="form-floating">
+            <textarea
+              class="form-control"
+              placeholder="Leave a comment here"
+              id="floatingTextarea2"
+              style="height: 100px"
+            ></textarea>
+            <label for="floatingTextarea2">Comments</label>
+          </div>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="button">Button</button>
+          </div>
         </div>
       </div>
     </main>
