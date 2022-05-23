@@ -10,7 +10,7 @@
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header><h1 class="text-center">Pick or Shuffle</h1></header>
@@ -33,7 +33,7 @@
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </p>
-          <div class="form-check">
+          <div id="suffleMode" class="form-check">
             <input
               class="form-check-input"
               type="radio"
@@ -45,7 +45,7 @@
               Shuffle Mode
             </label>
           </div>
-          <div class="form-check">
+          <div id="pickerMOde" class="form-check">
             <input
               class="form-check-input"
               type="radio"
@@ -56,18 +56,25 @@
               Picker Mode
             </label>
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
-            <label class="form-check-label" for="flexCheckDisabled">
+          <!-- Checkbox for remove item option -->
+          <div id="removePickedIems" class="form-check">
+            <input
+              id="flexCheckDefault"
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              disabled="true"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
               Remove Picked Items
             </label>
+          </div>
           <!-- Text Area -->
           <div class="form-floating">
-            <p id="text-area-instructions">Enter your items in the field below, each on a separate line.</p>
-            <textarea
-              class="form-control"
-              id="floatingTextarea2"
-            ></textarea>
+            <p id="text-area-instructions">
+              Enter your items in the field below, each on a separate line.
+            </p>
+            <textarea class="form-control" id="floatingTextarea2"></textarea>
           </div>
           <div class="d-grid gap-2">
             <button class="btn btn-primary" type="button">Button</button>
