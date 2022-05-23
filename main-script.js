@@ -7,9 +7,6 @@ let removeItemSelect = document.getElementById("flexCheckDefault");
 function enableCheckbox() {
   if (pickerMode.checked) {
     removeItemSelect.disabled = false;
-  } else {
-    removeItemSelect.disabled = true;
-    removeItemSelect.checked = false;
   }
 }
 
@@ -18,8 +15,6 @@ function disableCheckbox() {
   if (shuffleMode.checked) {
     removeItemSelect.disabled = true;
     removeItemSelect.checked = false;
-  } else {
-    removeItemSelect.disabled = false;
   }
 }
 
