@@ -1,0 +1,32 @@
+{
+  "name": "chance",
+  "version": "2.2.6",
+  "main": "chance.js",
+  "ignore": [
+    "node_modules"
+  ],
+  "description": "Chance - Utility library to generate anything random",
+  "homepage": "http://chancejs.com",
+  "keywords": [
+    "chance",
+    "random",
+    "generator"
+  ],
+  "author": {
+    "name": "Victor Quinn",
+    "web": "https://www.victorquinn.com"
+  },
+  "devDependencies": {
+    "phone_number_js": "~1.0.0"
+  },
+  "_release": "2.2.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.2.6",
+    "commit": "57634d50a205e693af333bc8eb6e01171fc74d1d"
+  },
+  "_source": "https://github.com/victorquinn/chancejs.git",
+  "_target": "^2.2.6",
+  "_originalSource": "chance",
+  "_direct": true
+}
