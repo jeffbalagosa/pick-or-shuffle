@@ -18,3 +18,7 @@ function enableCheckbox() {
 // Use event listeners on radio buttons to run functions
 pickerMode.addEventListener("change", enableCheckbox);
 shuffleMode.addEventListener("change", enableCheckbox);
+
+// Turn text box list into an array
+let textBox = document.getElementById("text-box");
+let lineArr = area.value.replace(/\r\n/g, "\n").split("\n");

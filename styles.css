@@ -3,7 +3,7 @@ p#text-area-instructions {
   margin-bottom: 0.2rem;
 }
 
-textarea#floatingTextarea2 {
+textarea#text-box {
   padding-top: 0.2rem;
   height: 400px;
 }
