@@ -30,7 +30,7 @@ function shuffleArr() {
 // Add li html tags to shuffledArr
 function addLiTags(array) {
   let newArr = [];
-  const resultOutput = document.getElementById("results-list");
+  const resultTarget = document.getElementById("results-list");
   for (let i = 0; i < array.length; i++) {
     const element = array[i];
     newArr.push(`<li>${element}</li>`);
@@ -38,12 +38,20 @@ function addLiTags(array) {
   return newArr;
 }
 
-// Put shuffler all together
+// Build Shuffle and Display It
+const resultTarget = document.getElementById("results-list");
 function shuffle() {
   let startArr = shuffleArr();
   let taggedArr = addLiTags(startArr);
-  const resultOutput = document.getElementById("results-list");
-  resultOutput.innerHTML = taggedArr.join("");
+  resultTarget.innerHTML = taggedArr.join("");
 }
 
-mainButton.onclick = shuffle;
+// Pick one at a time
+function pick() {
+  const originalArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
+  let taggedItem = `<li>${chance.pickone(originalArr)}</li>`;
+  resultTarget.innerHTML = taggedItem;
+}
+
+// Event Listener for button.
+mainButton.onclick = pick;
