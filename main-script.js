@@ -54,4 +54,4 @@ function pick() {
 }
 
 // Event Listener for button.
-mainButton.onclick = pick;
+mainButton.onclick = shuffle;
