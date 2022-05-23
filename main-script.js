@@ -1,7 +1,7 @@
 // define the target radio button for the event listener
-const pickerMode = document.getElementById("flexRadioDefault1");
-const shuffleMode = document.getElementById("flexRadioDefault2");
-let removeItemSelect = document.getElementById("flexCheckDefault");
+const pickerMode = document.getElementById("pickerMode");
+const shuffleMode = document.getElementById("shuffleMode");
+let removeItemSelect = document.getElementById("removeItemSelect");
 
 // define function to enable checkbox if picker mode is checked
 function enableCheckbox() {
