@@ -2,7 +2,12 @@ p#text-area-instructions {
   margin-top: 0.5rem;
   margin-bottom: 0.2rem;
 }
+
 textarea#floatingTextarea2 {
   padding-top: 0.2rem;
   height: 400px;
+}
+
+#removePickedIems {
+  margin-left: 1rem;
 }
