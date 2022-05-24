@@ -56,16 +56,10 @@ function pick() {
 
 // Pick one at a time but DO NOT allow duplicates
 function pick2() {
-  const originalArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
-  let newArr = [];
-  console.log(originalArr);
-  let pickedItem = chance.pickone(originalArr);
-  let indexOfPickedItem = originalArr.indexOf(pickedItem);
-  newArr = originalArr.splice(indexOfPickedItem, 1);
-  console.log(newArr);
-  let taggedItem = `<li>${pickedItem}</li>`;
-  resultTarget.innerHTML = taggedItem;
-  textBox.value = originalArr;
+  let newArr = shuffleArr();
+  let picked = newArr.pop();
+  resultTarget.innerHTML = picked;
+  textBox.value = newArr.split(",").join("\n");
 }
 
 //Test
