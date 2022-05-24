@@ -7,6 +7,7 @@ let removeItemSelect = document.getElementById("removeItemSelect");
 function enableCheckbox() {
   if (pickerMode.checked) {
     removeItemSelect.disabled = false;
+    mainButton.value = "Pick";
   }
   // Enable checkbox if suffle mode is checked
   if (shuffleMode.checked) {
@@ -46,12 +47,36 @@ function shuffle() {
   resultTarget.innerHTML = taggedArr.join("");
 }
 
-// Pick one at a time
+// Pick one at a time but allow duplicates
 function pick() {
   const originalArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
   let taggedItem = `<li>${chance.pickone(originalArr)}</li>`;
   resultTarget.innerHTML = taggedItem;
 }
 
+// Pick one at a time but DO NOT allow duplicates
+function pick2() {
+  const originalArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
+  let newArr = [];
+  console.log(originalArr);
+  let pickedItem = chance.pickone(originalArr);
+  let indexOfPickedItem = originalArr.indexOf(pickedItem);
+  newArr = originalArr.splice(indexOfPickedItem, 1);
+  console.log(newArr);
+  let taggedItem = `<li>${pickedItem}</li>`;
+  resultTarget.innerHTML = taggedItem;
+  textBox.value = originalArr;
+}
+
+//Test
+mainButton.onclick = pick2;
+
 // Event Listener for button.
-mainButton.onclick = shuffle;
+// mainButton.onclick = function () {
+//   if (shuffleMode.checked) {
+//     shuffle();
+//   }
+//   if (pickerMode.checked) {
+//     pick();
+//   }
+// };

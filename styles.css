@@ -20,3 +20,7 @@ textarea#text-box {
 #removePickedIems {
   margin-left: 1rem;
 }
+
+li {
+  list-style: none;
+}
