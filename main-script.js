@@ -34,31 +34,41 @@ function addLiTags(arr) {
 }
 
 // Shuffle and display Output
-function shuffle() {
-  const startingArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
-  let taggedArr = addLiTags(startingArr);
+function shuffle(array) {
+  let taggedArr = addLiTags(array);
   inputDisplay.innerHTML = taggedArr.join("");
   let newArr = chance.shuffle(taggedArr);
   resultTarget.innerHTML = newArr.join("");
 }
 
-// Pick one at a time but allow duplicates
-function pick() {
-  const startingArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
-  let taggedItem = `<li>${chance.pickone(startingArr)}</li>`;
-  resultTarget.innerHTML = taggedItem;
-}
-
 // Pick one at a time but DO NOT allow duplicates
-function pick2() {
-  let newArr = shuffleArr();
-  let picked = newArr.pop();
-  resultTarget.innerHTML = picked;
-  textBox.value = newArr.split(",").join("\n");
+function pick(array) {
+  let taggedArr = addLiTags(array);
+  inputDisplay.innerHTML = taggedArr.join("");
+  // Pick one of those tagged items at random.
+  let arrItem = chance.pickone(taggedArr);
+  // Display arrItem on Output card.
+  resultTarget.innerHTML = arrItem;
+  // get index0f arr Item
+  let indexOfItem = taggedArr.indexOf(arrItem);
+  // Remove arrItem item from taggedArr
+  taggedArr.splice(indexOfItem, 1);
+  console.log(taggedArr.length);
+  inputDisplay.innerHTML = taggedArr.join("");
 }
 
 //Test
-mainButton.onclick = shuffle;
+mainButton.onclick = function () {
+  const startingArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
+  console.log(startingArr.length);
+  let newArr = inputDisplay;
+
+  if (startingArr.length > newArr.length) {
+    pick(newArr);
+  } else {
+    pick(startingArr);
+  }
+};
 
 // Event Listener for button.
 // mainButton.onclick = function () {
