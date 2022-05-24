@@ -2,6 +2,9 @@ const pickerMode = document.getElementById("pickerMode");
 const shuffleMode = document.getElementById("shuffleMode");
 const mainButton = document.getElementById("main-button");
 let removeItemSelect = document.getElementById("removeItemSelect");
+const inputDisplay = document.getElementById("input-display");
+const textBox = document.getElementById("text-box");
+const resultTarget = document.getElementById("results-list");
 
 // define function to enable checkbox if pick mode radio is checked
 function enableCheckbox() {
@@ -20,37 +23,29 @@ function enableCheckbox() {
 pickerMode.addEventListener("change", enableCheckbox);
 shuffleMode.addEventListener("change", enableCheckbox);
 
-// Turn text box list into an array
-const textBox = document.getElementById("text-box");
-function shuffleArr() {
-  const originalArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
-  const shuffledArr = chance.shuffle(originalArr);
-  return shuffledArr;
-}
-
-// Add li html tags to shuffledArr
-function addLiTags(array) {
+// Add li Tags to array items
+function addLiTags(arr) {
   let newArr = [];
-  const resultTarget = document.getElementById("results-list");
-  for (let i = 0; i < array.length; i++) {
-    const element = array[i];
-    newArr.push(`<li>${element}</li>`);
+  for (let i = 0; i < arr.length; i++) {
+    const arrayItem = arr[i];
+    newArr.push(`<li>${arrayItem}</li>`);
   }
   return newArr;
 }
 
-// Build Shuffle and Display It
-const resultTarget = document.getElementById("results-list");
+// Shuffle and display Output
 function shuffle() {
-  let startArr = shuffleArr();
-  let taggedArr = addLiTags(startArr);
-  resultTarget.innerHTML = taggedArr.join("");
+  const startingArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
+  let taggedArr = addLiTags(startingArr);
+  inputDisplay.innerHTML = taggedArr.join("");
+  let newArr = chance.shuffle(taggedArr);
+  resultTarget.innerHTML = newArr.join("");
 }
 
 // Pick one at a time but allow duplicates
 function pick() {
-  const originalArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
-  let taggedItem = `<li>${chance.pickone(originalArr)}</li>`;
+  const startingArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
+  let taggedItem = `<li>${chance.pickone(startingArr)}</li>`;
   resultTarget.innerHTML = taggedItem;
 }
 
@@ -63,7 +58,7 @@ function pick2() {
 }
 
 //Test
-mainButton.onclick = pick2;
+mainButton.onclick = shuffle;
 
 // Event Listener for button.
 // mainButton.onclick = function () {
