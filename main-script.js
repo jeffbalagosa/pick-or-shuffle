@@ -19,7 +19,7 @@ function enableCheckbox() {
   }
 }
 
-// Use event listeners on radio buttons to run functions
+// Use event listeners on radio buttons
 pickerMode.addEventListener("change", enableCheckbox);
 shuffleMode.addEventListener("change", enableCheckbox);
 
@@ -47,7 +47,7 @@ function shuffle(array) {
   resultTarget.innerHTML = newArr.join("");
 }
 
-//Test
+// Event Listener for button click
 mainButton.onclick = function () {
   const arr = textBox.value.replace(/\r\n/g, "\n").split("\n");
 
@@ -63,13 +63,3 @@ mainButton.onclick = function () {
     console.log("pickMode is checked");
   }
 };
-
-// Event Listener for button.
-// mainButton.onclick = function () {
-//   if (shuffleMode.checked) {
-//     shuffle();
-//   }
-//   if (pickerMode.checked) {
-//     pick();
-//   }
-// };
