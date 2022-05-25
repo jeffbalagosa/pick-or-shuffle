@@ -33,6 +33,13 @@ function addLiTags(arr) {
   return newArr;
 }
 
+// Copy text area items to ul#input-display
+function copyArrToInputDisplay() {
+  const startingArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
+  const taggedArr = addLiTags(startingArr);
+  inputDisplay.innerHTML = taggedArr.join("");
+}
+
 // Shuffle and display Output
 function shuffle(array) {
   let taggedArr = addLiTags(array);
@@ -42,33 +49,10 @@ function shuffle(array) {
 }
 
 // Pick one at a time but DO NOT allow duplicates
-function pick(array) {
-  let taggedArr = addLiTags(array);
-  inputDisplay.innerHTML = taggedArr.join("");
-  // Pick one of those tagged items at random.
-  let arrItem = chance.pickone(taggedArr);
-  // Display arrItem on Output card.
-  resultTarget.innerHTML = arrItem;
-  // get index0f arr Item
-  let indexOfItem = taggedArr.indexOf(arrItem);
-  // Remove arrItem item from taggedArr
-  taggedArr.splice(indexOfItem, 1);
-  console.log(taggedArr.length);
-  inputDisplay.innerHTML = taggedArr.join("");
-}
+function pick(array) {}
 
 //Test
-mainButton.onclick = function () {
-  const startingArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
-  console.log(startingArr.length);
-  let newArr = inputDisplay;
-
-  if (startingArr.length > newArr.length) {
-    pick(newArr);
-  } else {
-    pick(startingArr);
-  }
-};
+mainButton.onclick = copyArrToInputDisplay;
 
 // Event Listener for button.
 // mainButton.onclick = function () {
