@@ -1,7 +1,7 @@
 const pickerMode = document.getElementById("pickerMode");
 const shuffleMode = document.getElementById("shuffleMode");
 const mainButton = document.getElementById("main-button");
-let removeItemSelect = document.getElementById("removeItemSelect");
+const removeItemSelect = document.getElementById("removeItemSelect");
 const inputDisplay = document.getElementById("input-display");
 const textBox = document.getElementById("text-box");
 const resultTarget = document.getElementById("results-list");
@@ -57,9 +57,11 @@ mainButton.onclick = function () {
     console.log("shuffleMode is checked");
   }
 
-  if (pickerMode.checked) {
+  if (removeItemSelect.checked) {
+    console.log("pickMode w/ removeItemSelect is checked");
+  } else if (pickerMode.checked) {
     copyArrToInputDisplay(arr);
     // get input-display array
-    console.log("pickMode is checked");
+    console.log("pickMode w/o removeItemSelect is checked");
   }
 };
