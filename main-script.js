@@ -34,9 +34,8 @@ function addLiTags(arr) {
 }
 
 // Copy text area items to ul#input-display
-function copyArrToInputDisplay() {
-  const startingArr = textBox.value.replace(/\r\n/g, "\n").split("\n");
-  const taggedArr = addLiTags(startingArr);
+function copyArrToInputDisplay(arr) {
+  const taggedArr = addLiTags(arr);
   inputDisplay.innerHTML = taggedArr.join("");
 }
 
@@ -48,11 +47,22 @@ function shuffle(array) {
   resultTarget.innerHTML = newArr.join("");
 }
 
-// Pick one at a time but DO NOT allow duplicates
-function pick(array) {}
-
 //Test
-mainButton.onclick = copyArrToInputDisplay;
+mainButton.onclick = function () {
+  const arr = textBox.value.replace(/\r\n/g, "\n").split("\n");
+
+  if (shuffleMode.checked) {
+    copyArrToInputDisplay(arr);
+    shuffle(arr);
+    console.log("shuffleMode is checked");
+  }
+
+  if (pickerMode.checked) {
+    copyArrToInputDisplay(arr);
+    // get input-display array
+    console.log("pickMode is checked");
+  }
+};
 
 // Event Listener for button.
 // mainButton.onclick = function () {
