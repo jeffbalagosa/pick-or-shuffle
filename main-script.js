@@ -61,7 +61,10 @@ mainButton.onclick = function () {
     console.log("pickMode w/ removeItemSelect is checked");
   } else if (pickerMode.checked) {
     copyArrToInputDisplay(arr);
-    // get input-display array
+    // capture input-display array
     console.log("pickMode w/o removeItemSelect is checked");
   }
+
+  // Hide textarea and unhide input-display div
+  document.getElementById("textAreaDiv").style.display = "none";
 };
