@@ -40,11 +40,30 @@ function copyArrToInputDisplay(arr) {
 }
 
 // Shuffle and display Output
-function shuffle(array) {
-  let taggedArr = addLiTags(array);
+function shuffle(arr) {
+  let taggedArr = addLiTags(arr);
   inputDisplay.innerHTML = taggedArr.join("");
   let newArr = chance.shuffle(taggedArr);
   resultTarget.innerHTML = newArr.join("");
+}
+
+function pickOneNoDuplicates(arr) {
+  console.log(arr);
+  // define new array
+  let newArr = [];
+  // Pick random item from array and display to out put
+  let pickedItem = chance.pickone(arr);
+  console.log(pickedItem);
+  // Find index of picked item to pass into splice
+  let itemIndex = arr.indexOf(pickedItem);
+  console.log(`itemIndex: ${itemIndex}`);
+  // Splice the item off the array and return the new array
+  arr.splice(itemIndex, 1);
+  console.log(`newArr1 ${arr}`);
+  // Display the new array on the input-display div of the Input card.
+  newArr = addLiTags(arr);
+  inputDisplay.innerHTML = newArr.join("");
+  resultTarget.innerHTML = `<li>${pickedItem}</li>`;
 }
 
 // Event Listener for button click
@@ -58,6 +77,7 @@ mainButton.onclick = function () {
   }
 
   if (removeItemSelect.checked) {
+    pickOneNoDuplicates(arr);
     console.log("pickMode w/ removeItemSelect is checked");
   } else if (pickerMode.checked) {
     copyArrToInputDisplay(arr);
