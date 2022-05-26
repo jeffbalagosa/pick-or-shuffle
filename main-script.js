@@ -42,7 +42,14 @@ function copyArrToInputDisplay(arr) {
 
 // Copy list items from ul#input-display and turn them into an arroay
 function copyArrFromInputDisplay() {
-  return Array.from(inputDisplay);
+  let newArr = [];
+  const lisNodes = inputDisplay.getElementsByTagName("li");
+  for (let i = 0; i < lisNodes.length; i++) {
+    const element = lisNodes[i];
+    newArr.push(element.innerHTML);
+  }
+  console.log(newArr);
+  return newArr;
 }
 
 // Shuffle and display Output
@@ -56,6 +63,13 @@ function shuffle(arr) {
 function pickOneNoDuplicates(arr) {
   // define new array
   let newArr = [];
+
+  if (count > 1) {
+    // Capture array from ul#inputdisplay
+    arr = copyArrFromInputDisplay();
+    // Pick an item from the newly created arr
+  }
+
   // Pick random item from array and display to out put
   let pickedItem = chance.pickone(arr);
   // Find index of picked item to pass into splice
@@ -66,12 +80,14 @@ function pickOneNoDuplicates(arr) {
   newArr = addLiTags(arr);
   inputDisplay.innerHTML = newArr.join("");
   resultTarget.innerHTML = `<li>${pickedItem}</li>`;
+
   count += 1;
   console.log(count);
 }
 
 // Event Listener for button click
 mainButton.onclick = function () {
+  // Capture array from text area and save to variable
   const arr = textBox.value.replace(/\r\n/g, "\n").split("\n");
 
   if (shuffleMode.checked) {
@@ -85,7 +101,6 @@ mainButton.onclick = function () {
     console.log("pickMode w/ removeItemSelect is checked");
   } else if (pickerMode.checked) {
     copyArrToInputDisplay(arr);
-    // capture input-display array
     console.log("pickMode w/o removeItemSelect is checked");
   }
   // Hide textarea and unhide input-display div
