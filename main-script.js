@@ -5,6 +5,7 @@ const removeItemSelect = document.getElementById("removeItemSelect");
 const inputDisplay = document.getElementById("input-display");
 const textBox = document.getElementById("text-box");
 const resultTarget = document.getElementById("results-list");
+let count = 1;
 
 // define function to enable checkbox if pick mode radio is checked
 function enableCheckbox() {
@@ -48,22 +49,20 @@ function shuffle(arr) {
 }
 
 function pickOneNoDuplicates(arr) {
-  console.log(arr);
   // define new array
   let newArr = [];
   // Pick random item from array and display to out put
   let pickedItem = chance.pickone(arr);
-  console.log(pickedItem);
   // Find index of picked item to pass into splice
   let itemIndex = arr.indexOf(pickedItem);
-  console.log(`itemIndex: ${itemIndex}`);
   // Splice the item off the array and return the new array
   arr.splice(itemIndex, 1);
-  console.log(`newArr1 ${arr}`);
   // Display the new array on the input-display div of the Input card.
   newArr = addLiTags(arr);
   inputDisplay.innerHTML = newArr.join("");
   resultTarget.innerHTML = `<li>${pickedItem}</li>`;
+  count += 1;
+  console.log(count);
 }
 
 // Event Listener for button click
