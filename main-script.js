@@ -17,6 +17,7 @@ function enableCheckbox() {
   if (shuffleMode.checked) {
     removeItemSelect.disabled = true;
     removeItemSelect.checked = false;
+    mainButton.value = "Shuffle";
   }
 }
 
@@ -82,7 +83,6 @@ function pickOneNoDuplicates(arr) {
   resultTarget.innerHTML = `<li>${pickedItem}</li>`;
 
   count += 1;
-  console.log(count);
 }
 
 // Event Listener for button click
@@ -93,12 +93,10 @@ mainButton.onclick = function () {
   if (shuffleMode.checked) {
     copyArrToInputDisplay(arr);
     shuffle(arr);
-    console.log("shuffleMode is checked");
   }
 
   if (removeItemSelect.checked) {
     pickOneNoDuplicates(arr);
-    console.log("pickMode w/ removeItemSelect is checked");
   } else if (pickerMode.checked) {
     copyArrToInputDisplay(arr);
     console.log("pickMode w/o removeItemSelect is checked");
