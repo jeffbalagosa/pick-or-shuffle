@@ -1,12 +1,17 @@
 /* Components */
+
 header {
   background-color: #f9dc5c;
+  background-image: url("img/card-shuffle.jpg");
+  background-size: 100% 400px;
 }
 
 h1 {
   font-family: "Caveat", cursive;
   font-weight: 700;
   font-size: 7rem;
+  color: white;
+  background-color: rgb(0, 0, 0, 0.7);
 }
 
 /* Center header text */

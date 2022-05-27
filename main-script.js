@@ -5,7 +5,9 @@ const removeItemSelect = document.getElementById("removeItemSelect");
 const inputDisplay = document.getElementById("input-display");
 const textBox = document.getElementById("text-box");
 const resultTarget = document.getElementById("results-list");
-const errorMessage = "<li>Error! No items to pick from.</li>";
+const errorMessage =
+  '<li class="text-warning">Error! No items to pick from.</li>';
+const header = document.getElementsByTagName("header");
 let count = 1;
 
 function enableCheckbox() {
