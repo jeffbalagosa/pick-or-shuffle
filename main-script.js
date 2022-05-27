@@ -5,6 +5,7 @@ const removeItemSelect = document.getElementById("removeItemSelect");
 const inputDisplay = document.getElementById("input-display");
 const textBox = document.getElementById("text-box");
 const resultTarget = document.getElementById("results-list");
+const errorMessage = "<li>Error! No items to pick from.</li>";
 let count = 1;
 
 function enableCheckbox() {
@@ -75,7 +76,7 @@ function pickOneNoDuplicates(arr) {
   }
 
   if (arr.length === 0) {
-    resultTarget.innerHTML = `<li>Error: No items to pick from.</li>`;
+    resultTarget.innerHTML = errorMessage;
   } else {
     // Pick random item from array and display to out put
     let pickedItem = chance.pickone(arr);

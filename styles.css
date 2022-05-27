@@ -1,4 +1,26 @@
 /* Components */
+header {
+  background-color: #f9dc5c;
+}
+
+h1 {
+  font-family: "Caveat", cursive;
+  font-weight: 700;
+  font-size: 7rem;
+}
+
+/* Center header text */
+header,
+h1 {
+  height: 400px;
+  line-height: 400px;
+}
+
+.card {
+  color: white;
+  background-color: #343f3e;
+  margin: 3rem 1rem;
+}
 
 main {
   width: 90%;
@@ -26,6 +48,8 @@ p#text-area-instructions {
 
 textarea#text-box,
 #input-display {
+  background-color: white;
+  color: black;
   padding-top: 0.2rem;
   margin-top: 0.2rem;
   padding-left: 0.5rem;
