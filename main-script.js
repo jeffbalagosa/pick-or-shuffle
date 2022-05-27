@@ -113,5 +113,7 @@ mainButton.onclick = function () {
   }
   // Hide textarea and unhide input-display div
   document.getElementById("textAreaDiv").style.display = "none";
+  document.getElementById("text-area-instructions").innerHTML =
+    "Text Input Locked. Click Reset to edit.";
   inputDisplay.style.display = "block";
 };

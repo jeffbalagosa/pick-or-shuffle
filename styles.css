@@ -33,7 +33,8 @@ main {
 }
 
 .card {
-  width: 50%;
+  width: 30%;
+  min-width: 450px;
 }
 
 li {
@@ -61,6 +62,7 @@ textarea#text-box,
   height: 25rem;
   border: 1px solid black;
   border-radius: 5px;
+  overflow: scroll;
 }
 
 #removePickedIems {
@@ -69,4 +71,29 @@ textarea#text-box,
 
 #action-buttons {
   margin-top: 1rem;
+}
+
+/* Output card */
+#output-area {
+  margin-top: 4rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* Footer */
+
+.flex-wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+footer {
+  background-color: #f9dc5c;
+}
+
+footer p {
+  text-align: center;
+  padding-top: 1rem;
 }
