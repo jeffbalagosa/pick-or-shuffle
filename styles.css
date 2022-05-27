@@ -1,3 +1,5 @@
+/* Components */
+
 main {
   width: 90%;
   margin: 0 auto;
@@ -7,20 +9,35 @@ main {
   width: 50%;
 }
 
+li {
+  list-style: none;
+}
+
+/* Input Card */
+
 p#text-area-instructions {
   margin-top: 0.5rem;
   margin-bottom: 0.2rem;
 }
 
-textarea#text-box {
+#input-display {
+  display: none;
+}
+
+textarea#text-box,
+#input-display {
   padding-top: 0.2rem;
-  height: 400px;
+  margin-top: 0.2rem;
+  padding-left: 0.5rem;
+  height: 25rem;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 #removePickedIems {
   margin-left: 1rem;
 }
 
-li {
-  list-style: none;
+#action-buttons {
+  margin-top: 1rem;
 }

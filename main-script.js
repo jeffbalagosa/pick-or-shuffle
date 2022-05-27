@@ -110,4 +110,5 @@ mainButton.onclick = function () {
   }
   // Hide textarea and unhide input-display div
   document.getElementById("textAreaDiv").style.display = "none";
+  inputDisplay.style.display = "block";
 };
