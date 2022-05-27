@@ -49,7 +49,6 @@ function copyArrFromInputDisplay() {
     const element = lisNodes[i];
     newArr.push(element.innerHTML);
   }
-  console.log(newArr);
   return newArr;
 }
 
@@ -61,6 +60,12 @@ function shuffle(arr) {
   resultTarget.innerHTML = newArr.join("");
 }
 
+function pickOne(arr) {
+  let pickedItem = chance.pickone(arr);
+  pickedItem = `<li>${pickedItem}</li>`;
+  resultTarget.innerHTML = pickedItem;
+}
+
 function pickOneNoDuplicates(arr) {
   // define new array
   let newArr = [];
@@ -68,7 +73,6 @@ function pickOneNoDuplicates(arr) {
   if (count > 1) {
     // Capture array from ul#inputdisplay
     arr = copyArrFromInputDisplay();
-    // Pick an item from the newly created arr
   }
 
   // Pick random item from array and display to out put
@@ -99,7 +103,7 @@ mainButton.onclick = function () {
     pickOneNoDuplicates(arr);
   } else if (pickerMode.checked) {
     copyArrToInputDisplay(arr);
-    console.log("pickMode w/o removeItemSelect is checked");
+    pickOne(arr);
   }
   // Hide textarea and unhide input-display div
   document.getElementById("textAreaDiv").style.display = "none";
