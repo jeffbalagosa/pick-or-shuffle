@@ -7,7 +7,6 @@ const textBox = document.getElementById("text-box");
 const resultTarget = document.getElementById("results-list");
 let count = 1;
 
-// define function to enable checkbox if pick mode radio is checked
 function enableCheckbox() {
   if (pickerMode.checked) {
     removeItemSelect.disabled = false;
@@ -75,18 +74,22 @@ function pickOneNoDuplicates(arr) {
     arr = copyArrFromInputDisplay();
   }
 
-  // Pick random item from array and display to out put
-  let pickedItem = chance.pickone(arr);
-  // Find index of picked item to pass into splice
-  let itemIndex = arr.indexOf(pickedItem);
-  // Splice the item off the array and return the new array
-  arr.splice(itemIndex, 1);
-  // Display the new array on the input-display div of the Input card.
-  newArr = addLiTags(arr);
-  inputDisplay.innerHTML = newArr.join("");
-  resultTarget.innerHTML = `<li>${pickedItem}</li>`;
+  if (arr.length === 0) {
+    resultTarget.innerHTML = `<li>Error: No items to pick from.</li>`;
+  } else {
+    // Pick random item from array and display to out put
+    let pickedItem = chance.pickone(arr);
+    // Find index of picked item to pass into splice
+    let itemIndex = arr.indexOf(pickedItem);
+    // Splice the item off the array and return the new array
+    arr.splice(itemIndex, 1);
+    // Display the new array on the input-display div of the Input card.
+    newArr = addLiTags(arr);
+    inputDisplay.innerHTML = newArr.join("");
+    resultTarget.innerHTML = `<li>${pickedItem}</li>`;
 
-  count += 1;
+    count += 1;
+  }
 }
 
 // Event Listener for button click
