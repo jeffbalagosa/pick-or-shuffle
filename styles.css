@@ -25,6 +25,7 @@ h1 {
   color: white;
   background-color: #343f3e;
   margin: 3rem 1rem;
+  box-shadow: 10px 5px 20px black;
 }
 
 main {

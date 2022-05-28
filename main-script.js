@@ -7,19 +7,21 @@ const textBox = document.getElementById("text-box");
 const resultTarget = document.getElementById("results-list");
 const errorMessage =
   '<li class="text-warning">Error! No items to pick from.</li>';
-const header = document.getElementsByTagName("header");
+const header = document.getElementById("header");
 let count = 1;
 
 function enableCheckbox() {
   if (pickerMode.checked) {
     removeItemSelect.disabled = false;
     mainButton.value = "Pick";
+    header.style.backgroundImage = "url('img/roulette.jpg')";
   }
   // Enable checkbox if suffle mode is checked
   if (shuffleMode.checked) {
     removeItemSelect.disabled = true;
     removeItemSelect.checked = false;
     mainButton.value = "Shuffle";
+    header.style.backgroundImage = "url('img/card-shuffle.jpg')";
   }
 }
 
