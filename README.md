@@ -2,6 +2,11 @@
 
 ## Description:
 
+Decision fatigue is a real thing!
+Every time you are forced to decide something throughout the day, you are depleting your executive function.
+Executive function enables us to plan, focus attention, remember instructions, and juggle multiple tasks successfully. It is your will power. It is your vital energy to help you stay disciplined to achieve your goals. It is a key ingredient to accomplishing goals.
+I created this app to help me save some of that executive function, whenever there’s a trivial decision to make.
+
 ## Features:
 
 ## How to Use:
