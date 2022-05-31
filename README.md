@@ -12,6 +12,10 @@ I created this app to help me save some of that executive function, whenever the
 
 ## Features:
 
+- Shuffle a list.
+- Pick and item from a list, while allowing duplicates.
+- Pick and item from a list, while **not** allowing duplicates.
+
 ## How to Use:
 
 ## Tchnologies:
