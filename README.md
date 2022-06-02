@@ -20,6 +20,8 @@ I created this app to help me save some of that executive function, whenever the
 
 ## Tchnologies:
 
+## Collaborators
+
 ## License:
 
 MIT License
