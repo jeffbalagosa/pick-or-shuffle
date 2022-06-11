@@ -78,15 +78,14 @@ function pickOneNoDuplicates(arr) {
 
 // Event Listener for button click
 mainButton.onclick = function () {
-  if (shuffleMode.checked) {
-    let inputArray = getArrFromTextBox();
-    let shuffledArray = chance.shuffle(inputArray);
-    resultTarget.innerHTML = addLITags(shuffledArray).join("");
-  }
+  let inputArray = getArrFromTextBox();
+  let shuffledArray = chance.shuffle(inputArray);
 
-  if (removeItemSelect.checked) {
-    console.log("Remove Item is checked.");
+  if (shuffleMode.checked) {
+    resultTarget.innerHTML = addLITags(shuffledArray).join("");
   } else if (pickerMode.checked) {
     console.log("Pick mode is checked.");
+    let pickedItem = `<li>${chance.pickone(inputArray)}</li>`;
+    resultTarget.innerHTML = pickedItem;
   }
 };
