@@ -33,9 +33,13 @@ shuffleMode.addEventListener("change", enableCheckbox);
 // turn them into an array
 // shuffle array
 // return shuffled array
-function copyArrFromTextBox() {
+function getArrFromTextBox() {
+  let arr = Array.from(textBox.children);
   let newArr = [];
-  newArr = textBox.children;
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i].innerHTML;
+    newArr.push(item);
+  }
   return newArr;
 }
 
@@ -51,7 +55,7 @@ function pickOneNoDuplicates(arr) {
 
   if (count > 1) {
     // Capture array from ul#inputdisplay
-    arr = copyArrFromTextBox();
+    arr = getArrFromTextBox();
   }
 
   if (arr.length === 0) {
@@ -76,7 +80,7 @@ function pickOneNoDuplicates(arr) {
 mainButton.onclick = function () {
   if (shuffleMode.checked) {
     console.log("Shuffle is checked");
-    console.log(copyArrFromTextBox());
+    console.log(getArrFromTextBox());
   }
 
   if (removeItemSelect.checked) {
