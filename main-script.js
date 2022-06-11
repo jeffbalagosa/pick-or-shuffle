@@ -25,10 +25,6 @@ function enableCheckbox() {
   }
 }
 
-// Use event listeners on radio buttons
-pickerMode.addEventListener("change", enableCheckbox);
-shuffleMode.addEventListener("change", enableCheckbox);
-
 function getArrFromTextBox() {
   let arr = Array.from(textBox.children);
   let newArr = [];
@@ -76,6 +72,10 @@ function pickOneNoDuplicates(arr) {
   }
 }
 
+// Use event listeners on radio buttons
+pickerMode.addEventListener("change", enableCheckbox);
+shuffleMode.addEventListener("change", enableCheckbox);
+
 // Event Listener for button click
 mainButton.onclick = function () {
   let inputArray = getArrFromTextBox();
@@ -84,7 +84,6 @@ mainButton.onclick = function () {
   if (shuffleMode.checked) {
     resultTarget.innerHTML = addLITags(shuffledArray).join("");
   } else if (pickerMode.checked) {
-    console.log("Pick mode is checked.");
     let pickedItem = `<li>${chance.pickone(inputArray)}</li>`;
     resultTarget.innerHTML = pickedItem;
   }
