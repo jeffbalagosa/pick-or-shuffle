@@ -29,10 +29,6 @@ function enableCheckbox() {
 pickerMode.addEventListener("change", enableCheckbox);
 shuffleMode.addEventListener("change", enableCheckbox);
 
-// Copy list items from text-box
-// turn them into an array
-// shuffle array
-// return shuffled array
 function getArrFromTextBox() {
   let arr = Array.from(textBox.children);
   let newArr = [];
@@ -43,10 +39,14 @@ function getArrFromTextBox() {
   return newArr;
 }
 
-function pickOne(arr) {
-  let pickedItem = chance.pickone(arr);
-  pickedItem = `<li>${pickedItem}</li>`;
-  resultTarget.innerHTML = pickedItem;
+// Add li tags to array items
+function addLITags(arr) {
+  let newArr = [];
+  arr.forEach((item) => {
+    item = `<li>${item}</li>`;
+    newArr.push(item);
+  });
+  return newArr;
 }
 
 function pickOneNoDuplicates(arr) {
@@ -79,8 +79,9 @@ function pickOneNoDuplicates(arr) {
 // Event Listener for button click
 mainButton.onclick = function () {
   if (shuffleMode.checked) {
-    console.log("Shuffle is checked");
-    console.log(getArrFromTextBox());
+    let inputArray = getArrFromTextBox();
+    let shuffledArray = chance.shuffle(inputArray);
+    resultTarget.innerHTML = addLITags(shuffledArray).join("");
   }
 
   if (removeItemSelect.checked) {
