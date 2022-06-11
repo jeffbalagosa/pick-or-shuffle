@@ -29,39 +29,14 @@ function enableCheckbox() {
 pickerMode.addEventListener("change", enableCheckbox);
 shuffleMode.addEventListener("change", enableCheckbox);
 
-// Add li Tags to array items
-function addLiTags(arr) {
+// Copy list items from text-box
+// turn them into an array
+// shuffle array
+// return shuffled array
+function copyArrFromTextBox() {
   let newArr = [];
-  for (let i = 0; i < arr.length; i++) {
-    const arrayItem = arr[i];
-    newArr.push(`<li>${arrayItem}</li>`);
-  }
+  newArr = textBox.children;
   return newArr;
-}
-
-// Copy text area items to ul#input-display
-function copyArrToInputDisplay(arr) {
-  const taggedArr = addLiTags(arr);
-  inputDisplay.innerHTML = taggedArr.join("");
-}
-
-// Copy list items from ul#input-display and turn them into an arroay
-function copyArrFromInputDisplay() {
-  let newArr = [];
-  const lisNodes = inputDisplay.getElementsByTagName("li");
-  for (let i = 0; i < lisNodes.length; i++) {
-    const element = lisNodes[i];
-    newArr.push(element.innerHTML);
-  }
-  return newArr;
-}
-
-// Shuffle and display Output
-function shuffle(arr) {
-  let taggedArr = addLiTags(arr);
-  inputDisplay.innerHTML = taggedArr.join("");
-  let newArr = chance.shuffle(taggedArr);
-  resultTarget.innerHTML = newArr.join("");
 }
 
 function pickOne(arr) {
@@ -76,7 +51,7 @@ function pickOneNoDuplicates(arr) {
 
   if (count > 1) {
     // Capture array from ul#inputdisplay
-    arr = copyArrFromInputDisplay();
+    arr = copyArrFromTextBox();
   }
 
   if (arr.length === 0) {
@@ -91,7 +66,7 @@ function pickOneNoDuplicates(arr) {
     // Display the new array on the input-display div of the Input card.
     newArr = addLiTags(arr);
     inputDisplay.innerHTML = newArr.join("");
-    resultTarget.innerHTML = `<li>${pickedItem}</li>`;
+    resultTarget.innerHTML = `<li>${pickedItem}<li>`;
 
     count += 1;
   }
@@ -99,23 +74,14 @@ function pickOneNoDuplicates(arr) {
 
 // Event Listener for button click
 mainButton.onclick = function () {
-  // Capture array from text area and save to variable
-  const arr = textBox.value.replace(/\r\n/g, "\n").split("\n");
-
   if (shuffleMode.checked) {
-    copyArrToInputDisplay(arr);
-    shuffle(arr);
+    console.log("Shuffle is checked");
+    console.log(copyArrFromTextBox());
   }
 
   if (removeItemSelect.checked) {
-    pickOneNoDuplicates(arr);
+    console.log("Remove Item is checked.");
   } else if (pickerMode.checked) {
-    copyArrToInputDisplay(arr);
-    pickOne(arr);
+    console.log("Pick mode is checked.");
   }
-  // Hide textarea and unhide input-display div
-  document.getElementById("textAreaDiv").style.display = "none";
-  document.getElementById("text-area-instructions").innerHTML =
-    "Text Input Locked. Click Reset to edit.";
-  inputDisplay.style.display = "block";
 };
