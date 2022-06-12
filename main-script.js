@@ -36,40 +36,13 @@ function getArrFromTextBox() {
 }
 
 // Add li tags to array items
-function addLITags(arr) {
+function addHTMLTags(arr, tagType) {
   let newArr = [];
   arr.forEach((item) => {
-    item = `<li>${item}</li>`;
+    item = `<${tagType}>${item}</${tagType}>`;
     newArr.push(item);
   });
   return newArr;
-}
-
-function pickOneNoDuplicates(arr) {
-  // define new array
-  let newArr = [];
-
-  if (count > 1) {
-    // Capture array from ul#inputdisplay
-    arr = getArrFromTextBox();
-  }
-
-  if (arr.length === 0) {
-    resultTarget.innerHTML = errorMessage;
-  } else {
-    // Pick random item from array and display to out put
-    let pickedItem = chance.pickone(arr);
-    // Find index of picked item to pass into splice
-    let itemIndex = arr.indexOf(pickedItem);
-    // Splice the item off the array and return the new array
-    arr.splice(itemIndex, 1);
-    // Display the new array on the input-display div of the Input card.
-    newArr = addLiTags(arr);
-    inputDisplay.innerHTML = newArr.join("");
-    resultTarget.innerHTML = `<li>${pickedItem}<li>`;
-
-    count += 1;
-  }
 }
 
 // Use event listeners on radio buttons
@@ -82,9 +55,16 @@ mainButton.onclick = function () {
   let shuffledArray = chance.shuffle(inputArray);
 
   if (shuffleMode.checked) {
-    resultTarget.innerHTML = addLITags(shuffledArray).join("");
+    resultTarget.innerHTML = addHTMLTags(shuffledArray, "li").join("");
   } else if (pickerMode.checked) {
-    let pickedItem = `<li>${chance.pickone(inputArray)}</li>`;
-    resultTarget.innerHTML = pickedItem;
+    let pickedItem = chance.pickone(inputArray);
+    let pickedlistItem = `<li>${pickedItem}</li>`;
+    resultTarget.innerHTML = pickedlistItem;
+    if (removeItemSelect.checked) {
+      // Remove item from div
+      let itemIndex = inputArray.indexOf(pickedItem);
+      inputArray.splice(itemIndex, 1);
+      textBox.innerHTML = addHTMLTags(inputArray, "div").join("");
+    }
   }
 };
