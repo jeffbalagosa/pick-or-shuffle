@@ -63,6 +63,8 @@ shuffleMode.addEventListener("change", enableCheckbox);
 
 // Event Listener for button click
 mainButton.onclick = function () {
+  // if Firefox detected, add <div> tags each line item in textBox and remove any <br> tags
+
   let inputArray = getArrFromTextBox();
   let shuffledArray = chance.shuffle(inputArray);
 
