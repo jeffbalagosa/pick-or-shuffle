@@ -3,12 +3,15 @@ const shuffleMode = document.getElementById("shuffleMode");
 const mainButton = document.getElementById("main-button");
 const removeItemSelect = document.getElementById("removeItemSelect");
 const inputDisplay = document.getElementById("input-display");
-const textBox = document.getElementById("text-box");
+const textBox = document.getElementById("text-box").value;
+const textBoxArr = textBox.split(/\r?\n/);
 const resultTarget = document.getElementById("results-list");
 const errorMessage =
   '<li class="text-warning">Error! No items to pick from.</li>';
 const header = document.getElementById("header");
 let count = 1;
+
+console.log(textBoxArr);
 
 function enableCheckbox() {
   if (pickerMode.checked) {
@@ -23,16 +26,6 @@ function enableCheckbox() {
     mainButton.value = "Shuffle";
     header.style.backgroundImage = "url('img/card-shuffle.jpg')";
   }
-}
-
-function getArrFromTextBox() {
-  let arr = Array.from(textBox.children);
-  let newArr = [];
-  for (let i = 0; i < arr.length; i++) {
-    const item = arr[i].innerHTML;
-    newArr.push(item);
-  }
-  return newArr;
 }
 
 // Add li tags to array items
@@ -63,9 +56,7 @@ shuffleMode.addEventListener("change", enableCheckbox);
 
 // Event Listener for button click
 mainButton.onclick = function () {
-  // if Firefox detected, add <div> tags each line item in textBox and remove any <br> tags
-
-  let inputArray = getArrFromTextBox();
+  let inputArray = textBoxArr;
   let shuffledArray = chance.shuffle(inputArray);
 
   if (shuffleMode.checked) {

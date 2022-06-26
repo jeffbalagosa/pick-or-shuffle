@@ -53,19 +53,20 @@ p#text-area-instructions {
   display: none;
 }
 
-div#text-box {
+#text-box {
   background-color: white;
   color: black;
   padding-top: 0.2rem;
   margin-top: 0.2rem;
   padding-left: 0.5rem;
   height: 25rem;
+  width: 100%;
   border: 1px solid black;
   border-radius: 5px;
   overflow: scroll;
 }
 
-div#text-box:focus {
+#text-box:focus {
   box-shadow: 0 0 10px rgba(81, 203, 238, 1);
   padding: 3px 0px 3px 3px;
   margin: 5px 1px 3px 0px;
