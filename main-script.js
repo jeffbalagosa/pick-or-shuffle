@@ -3,13 +3,13 @@ const shuffleMode = document.getElementById("shuffleMode");
 const mainButton = document.getElementById("main-button");
 const removeItemSelect = document.getElementById("removeItemSelect");
 const inputDisplay = document.getElementById("input-display");
-const textBox = document.getElementById("text-box").value;
+let textBox = document.getElementById("text-box").value;
 const textBoxArr = textBox.split(/\r?\n/);
 const resultTarget = document.getElementById("results-list");
 const errorMessage =
   '<li class="text-warning">Error! No items to pick from.</li>';
 const header = document.getElementById("header");
-let count = 1;
+let count = 0;
 
 console.log(textBoxArr);
 
@@ -66,10 +66,15 @@ mainButton.onclick = function () {
     let pickedlistItem = `<li>${pickedItem}</li>`;
     resultTarget.innerHTML = pickedlistItem;
     if (removeItemSelect.checked) {
-      // Remove item from div
-      let itemIndex = inputArray.indexOf(pickedItem);
-      inputArray.splice(itemIndex, 1);
-      textBox.innerHTML = addHTMLTags(inputArray, "div").join("");
+      // Remove item from textBox
+      while (count > 0) {
+        let itemIndex = inputArray.indexOf(pickedItem);
+        inputArray.splice(itemIndex, 1);
+        console.log(inputArray);
+        textBox = inputArray.join("/n");
+        count += 1;
+        console.log(count);
+      }
     }
   }
 };
