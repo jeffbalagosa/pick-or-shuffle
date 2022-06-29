@@ -50,5 +50,5 @@ SOFTWARE.
 
 v1.10 - 06.07.2022
 
-- Change input field to contenteditable div
-- Remove input display box
+- Fix textarea compatibility issues between browsers.
+- Remove input display box.
