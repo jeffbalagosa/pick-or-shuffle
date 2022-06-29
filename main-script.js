@@ -4,11 +4,8 @@ const mainButton = document.getElementById("main-button");
 const removeItemSelect = document.getElementById("removeItemSelect");
 const inputDisplay = document.getElementById("input-display");
 const resultTarget = document.getElementById("results-list");
-let textBox = document.getElementById("text-box").value;
-const errorMessage =
-  '<li class="text-warning">Error! No items to pick from.</li>';
 const header = document.getElementById("header");
-let count = 0;
+let textBox = document.getElementById("text-box").value;
 
 function enableCheckbox() {
   if (pickerMode.checked) {
@@ -64,16 +61,11 @@ mainButton.onclick = function () {
     let pickedItem = chance.pickone(inputArray);
     let pickedlistItem = `<li>${pickedItem}</li>`;
     resultTarget.innerHTML = pickedlistItem;
-    if (removeItemSelect.checked) {
+    if (removeItemSelect.checked && inputArray.length > 0) {
       // Remove item from textBox
-      while (count > 0) {
-        let itemIndex = inputArray.indexOf(pickedItem);
-        inputArray.splice(itemIndex, 1);
-        console.log(inputArray);
-        textBox = inputArray.join("/n");
-        count += 1;
-        console.log(count);
-      }
+      let itemIndex = inputArray.indexOf(pickedItem);
+      inputArray.splice(itemIndex, 1);
+      document.getElementById("text-box").value = inputArray.join("\n");
     }
   }
 };
