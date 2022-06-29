@@ -53,6 +53,9 @@ mainButton.onclick = function () {
   textBox = document.getElementById("text-box").value;
   const textBoxArr = textBox.split(/\r?\n/);
   let inputArray = textBoxArr;
+  // trim empty lines off inputArray
+  inputArray = inputArray.filter((e) => String(e).trim());
+
   let shuffledArray = chance.shuffle(inputArray);
 
   if (shuffleMode.checked) {
