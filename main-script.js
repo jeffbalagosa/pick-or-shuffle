@@ -3,15 +3,12 @@ const shuffleMode = document.getElementById("shuffleMode");
 const mainButton = document.getElementById("main-button");
 const removeItemSelect = document.getElementById("removeItemSelect");
 const inputDisplay = document.getElementById("input-display");
-let textBox = document.getElementById("text-box").value;
-const textBoxArr = textBox.split(/\r?\n/);
 const resultTarget = document.getElementById("results-list");
+let textBox = document.getElementById("text-box").value;
 const errorMessage =
   '<li class="text-warning">Error! No items to pick from.</li>';
 const header = document.getElementById("header");
 let count = 0;
-
-console.log(textBoxArr);
 
 function enableCheckbox() {
   if (pickerMode.checked) {
@@ -56,6 +53,8 @@ shuffleMode.addEventListener("change", enableCheckbox);
 
 // Event Listener for button click
 mainButton.onclick = function () {
+  textBox = document.getElementById("text-box").value;
+  const textBoxArr = textBox.split(/\r?\n/);
   let inputArray = textBoxArr;
   let shuffledArray = chance.shuffle(inputArray);
 
