@@ -37,7 +37,7 @@ textBox.onpaste = function (e) {
   // cancel paste
   e.preventDefault();
 
-  // get text representation of clipboard
+  // get plain text representation of clipboard
   let text = (e.originalEvent || e).clipboardData.getData("text/plain");
 
   // insert text manually
@@ -56,9 +56,8 @@ mainButton.onclick = function () {
   // trim empty lines off inputArray
   inputArray = inputArray.filter((e) => String(e).trim());
 
-  let shuffledArray = chance.shuffle(inputArray);
-
   if (shuffleMode.checked) {
+    let shuffledArray = chance.shuffle(inputArray);
     resultTarget.innerHTML = addHTMLTags(shuffledArray, "li").join("");
   } else if (pickerMode.checked) {
     let pickedItem = chance.pickone(inputArray);
