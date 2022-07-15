@@ -18,9 +18,17 @@ I created this app to help me save some of that executive function, whenever the
 
 ## How to Use:
 
+### Randomizing a list of strings.
+
+1. Ensure the **Shuffle Mode radio button** is selected on the right panel.
+2. Type or copy a list of strings, separated by line breaks, into the text area provided.
+3. Click the **Shuffle** button.
+
 ## Tchnologies:
 
-## Collaborators
+- HTML
+- CSS
+- JavaScript
 
 ## License:
 
