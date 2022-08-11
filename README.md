@@ -18,9 +18,25 @@ I created this app to help me save some of that executive function, whenever the
 
 ## How to Use:
 
+Shuffle a list of strings.
+
+- Pick **Shuffle Mode** option (default).
+- Enter list into text box provided.
+- Click the **Shuffle** button to shuffle the list.
+
+Pick items 1 at a time from a list of strings.
+
+- Pick **Pick Mode** option.
+- Enter list into text box provided.
+- Click the **Pick** button to pick a random item from the list.
+- Put a check next to **Remove Picked Items**, to avoid picking duplicates.
+
 ## Tchnologies:
 
-## Collaborators
+- JavaScript
+- [Chance.js Library](https://chancejs.com/index.html) (Yes, I know how to use **Math.random** for randomization, but Chance.js is a lot of fun to play with!)
+- CSS
+- HTML
 
 ## License:
 
