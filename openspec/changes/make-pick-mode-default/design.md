@@ -10,7 +10,8 @@ This change makes Pick mode the initial state while preserving the existing two-
 - Load the app with Pick mode selected.
 - Ensure initial UI state matches Pick mode: `Pick` action label, enabled remove-picked-items checkbox, and pick-mode header image.
 - Keep Shuffle mode available and unchanged after users switch modes.
-- Update documentation and tests to reflect the new default.
+- Use TDD: add failing regression tests for the new default first, then update implementation to pass them.
+- Update documentation to reflect the new default.
 
 **Non-Goals:**
 - Redesigning the mode selector or input/output layout.
@@ -28,8 +29,12 @@ This change makes Pick mode the initial state while preserving the existing two-
   - Alternative considered: update static HTML/CSS defaults only. Rejected because future changes to mode-dependent UI would need duplicate maintenance and current CSS still defaults the header to the shuffle image.
 
 - Add focused regression coverage for initial Pick mode state.
-  - Rationale: this is a default-state change with user-visible controls; tests should catch accidental reversion to Shuffle mode or partial Pick mode initialization.
+  - Rationale: this is a default-state change with user-visible controls; tests should be written first and fail against the current Shuffle-default behavior before implementation changes are made.
   - Alternative considered: rely on manual verification. Rejected because the existing test suite already covers related Pick mode behavior.
+
+- Follow a red-green-refactor implementation sequence.
+  - Rationale: the behavior is small and user-visible, making it well-suited for tests that describe initial state and mode switching before code changes.
+  - Alternative considered: update markup and JavaScript first, then add tests. Rejected because the requested workflow is TDD and test-first ordering gives clearer regression protection.
 
 ## Risks / Trade-offs
 
