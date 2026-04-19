@@ -5,20 +5,60 @@ const removeItemSelect = document.getElementById("removeItemSelect");
 const inputDisplay = document.getElementById("input-display");
 const resultTarget = document.getElementById("results-list");
 const header = document.getElementById("header");
-let textBox = document.getElementById("text-box").value;
+const textBoxEl = document.getElementById("text-box");
+let textBox = textBoxEl.value;
+
+// Parse newline-delimited text into a filtered array of non-empty items.
+function parseItems(text) {
+  return text.split(/\r?\n/).filter((line) => line.trim() !== "");
+}
+
+// Return true only for absolute http/https URLs.
+function isUrl(item) {
+  try {
+    const url = new URL(item);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+// Render the Pick-mode input display from an array of items.
+function renderPickInput(items) {
+  inputDisplay.innerHTML = "";
+  items.forEach((item) => {
+    const div = document.createElement("div");
+    div.className = "pick-input-item";
+    if (isUrl(item)) {
+      const a = document.createElement("a");
+      a.href = item;
+      a.textContent = item;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      div.appendChild(a);
+    } else {
+      div.textContent = item;
+    }
+    inputDisplay.appendChild(div);
+  });
+}
 
 function enableCheckbox() {
   if (pickerMode.checked) {
     removeItemSelect.disabled = false;
     mainButton.value = "Pick";
     header.style.backgroundImage = "url('img/roulette.jpg')";
+    textBoxEl.style.display = "block";
+    inputDisplay.style.display = "none";
   }
-  // Enable checkbox if suffle mode is checked
+  // Enable checkbox if shuffle mode is checked
   if (shuffleMode.checked) {
     removeItemSelect.disabled = true;
     removeItemSelect.checked = false;
     mainButton.value = "Shuffle";
     header.style.backgroundImage = "url('img/card-shuffle.jpg')";
+    textBoxEl.style.display = "block";
+    inputDisplay.style.display = "none";
   }
 }
 
@@ -33,7 +73,7 @@ function addHTMLTags(arr, tagType) {
 }
 
 // Turn anything pasted into the textbox into plain text
-textBox.onpaste = function (e) {
+textBoxEl.onpaste = function (e) {
   // cancel paste
   e.preventDefault();
 
@@ -50,24 +90,36 @@ shuffleMode.addEventListener("change", enableCheckbox);
 
 // Event Listener for button click
 mainButton.onclick = function () {
-  textBox = document.getElementById("text-box").value;
-  const textBoxArr = textBox.split(/\r?\n/);
-  let inputArray = textBoxArr;
-  // trim empty lines off inputArray
-  inputArray = inputArray.filter((e) => String(e).trim());
+  textBox = textBoxEl.value;
+  const inputArray = parseItems(textBox);
 
   if (shuffleMode.checked) {
     let shuffledArray = chance.shuffle(inputArray);
     resultTarget.innerHTML = addHTMLTags(shuffledArray, "li").join("");
   } else if (pickerMode.checked) {
     let pickedItem = chance.pickone(inputArray);
-    let pickedlistItem = `<li>${pickedItem}</li>`;
-    resultTarget.innerHTML = pickedlistItem;
+
+    // Render picked item as anchor if it is a URL, otherwise plain text
+    const li = document.createElement("li");
+    if (isUrl(pickedItem)) {
+      const a = document.createElement("a");
+      a.href = pickedItem;
+      a.textContent = pickedItem;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      li.appendChild(a);
+    } else {
+      li.textContent = pickedItem;
+    }
+    resultTarget.innerHTML = "";
+    resultTarget.appendChild(li);
+
     if (removeItemSelect.checked && inputArray.length > 0) {
-      // Remove item from textBox
+      // Remove item from textBox and update rendered input
       let itemIndex = inputArray.indexOf(pickedItem);
       inputArray.splice(itemIndex, 1);
-      document.getElementById("text-box").value = inputArray.join("\n");
+      textBoxEl.value = inputArray.join("\n");
+      renderPickInput(inputArray);
     }
   }
 };

@@ -1,13 +1,13 @@
 ## 1. Update Pick mode UI
 
-- [ ] 1.1 Add a Pick-mode input presentation in [index.html](c:/Users/jeffb/Documents/_projects/pick-or-shuffle/index.html) that can show newline-delimited items and render URL entries as clickable links.
-- [ ] 1.2 Add styles in [styles.css](c:/Users/jeffb/Documents/_projects/pick-or-shuffle/styles.css) for Pick-mode link rendering in the input and output areas without changing Shuffle mode layout.
+- [x] 1.1 Add a Pick-mode input presentation in [index.html](c:/Users/jeffb/Documents/_projects/pick-or-shuffle/index.html) that can show newline-delimited items and render URL entries as clickable links.
+- [x] 1.2 Add styles in [styles.css](c:/Users/jeffb/Documents/_projects/pick-or-shuffle/styles.css) for Pick-mode link rendering in the input and output areas without changing Shuffle mode layout.
 
 ## 2. Implement Pick mode URL rendering
 
-- [ ] 2.1 Refactor [main-script.js](c:/Users/jeffb/Documents/_projects/pick-or-shuffle/main-script.js) to centralize item parsing and URL detection for Pick mode.
-- [ ] 2.2 Update Pick mode output rendering so picked `http` and `https` items are created as clickable anchors and non-URL items remain plain text.
-- [ ] 2.3 Preserve remove-picked-items behavior by updating both the underlying text value and the Pick-mode rendered input after a URL item is removed.
+- [x] 2.1 Refactor [main-script.js](c:/Users/jeffb/Documents/_projects/pick-or-shuffle/main-script.js) to centralize item parsing and URL detection for Pick mode.
+- [x] 2.2 Update Pick mode output rendering so picked `http` and `https` items are created as clickable anchors and non-URL items remain plain text.
+- [x] 2.3 Preserve remove-picked-items behavior by updating both the underlying text value and the Pick-mode rendered input after a URL item is removed.
 
 ## 3. Verify behavior
 
