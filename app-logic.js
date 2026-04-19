@@ -19,17 +19,38 @@
     return [...shuffler([...items])];
   }
 
-  function getRemainingItems(items, pickedItem, removePickedItems) {
+  function normalizePickCount(count) {
+    const n = parseInt(count, 10);
+    if (isNaN(n) || n < 1 || !Number.isInteger(Number(count))) {
+      return 1;
+    }
+    return n;
+  }
+
+  function pickItems(items, count, shuffler) {
+    const shuffled = shuffler([...items]);
+    return shuffled.slice(0, count);
+  }
+
+  function getRemainingItems(items, picked, removePickedItems) {
     if (!removePickedItems) {
       return [...items];
     }
 
-    const itemIndex = items.indexOf(pickedItem);
-    if (itemIndex === -1) {
-      return [...items];
+    const pickedItems = Array.isArray(picked) ? picked : [picked];
+    let remaining = [...items];
+
+    for (const item of pickedItems) {
+      const itemIndex = remaining.indexOf(item);
+      if (itemIndex !== -1) {
+        remaining = [
+          ...remaining.slice(0, itemIndex),
+          ...remaining.slice(itemIndex + 1)
+        ];
+      }
     }
 
-    return [...items.slice(0, itemIndex), ...items.slice(itemIndex + 1)];
+    return remaining;
   }
 
   function isHttpUrl(item) {
@@ -52,8 +73,10 @@
     classifyResult,
     getRemainingItems,
     isHttpUrl,
+    normalizePickCount,
     parseItems,
     pickItem,
+    pickItems,
     shuffleItems
   };
 });

@@ -23,6 +23,8 @@
     const resultTarget = document.getElementById("results-list");
     const header = document.getElementById("header");
     const textBoxEl = document.getElementById("text-box");
+    const pickCountInput = document.getElementById("pickCountInput");
+    const pickCountWrapper = document.getElementById("pickCountWrapper");
 
     function createResultNode(item, tagName) {
       const element = document.createElement(tagName);
@@ -65,6 +67,7 @@
         header.style.backgroundImage = "url('img/roulette.jpg')";
         textBoxEl.style.display = "block";
         inputDisplay.style.display = "none";
+        if (pickCountWrapper) pickCountWrapper.style.display = "block";
       }
 
       if (shuffleMode.checked) {
@@ -74,6 +77,7 @@
         header.style.backgroundImage = "url('img/card-shuffle.jpg')";
         textBoxEl.style.display = "block";
         inputDisplay.style.display = "none";
+        if (pickCountWrapper) pickCountWrapper.style.display = "none";
       }
     }
 
@@ -100,15 +104,36 @@
       }
 
       if (pickerMode.checked) {
-        const pickedItem = logic.pickItem(inputArray, (items) =>
-          randomizer.pickone(items)
+        const pickCount = logic.normalizePickCount(
+          pickCountInput ? pickCountInput.value : 1
         );
-        renderResultItems([pickedItem]);
 
-        if (removeItemSelect.checked && inputArray.length > 0) {
-          const remainingItems = logic.getRemainingItems(inputArray, pickedItem, true);
-          textBoxEl.value = remainingItems.join("\n");
-          renderPickInput(remainingItems);
+        if (pickCount === 1) {
+          const pickedItem = logic.pickItem(inputArray, (items) =>
+            randomizer.pickone(items)
+          );
+          renderResultItems([pickedItem]);
+
+          if (removeItemSelect.checked && inputArray.length > 0) {
+            const remainingItems = logic.getRemainingItems(inputArray, pickedItem, true);
+            textBoxEl.value = remainingItems.join("\n");
+            renderPickInput(remainingItems);
+          }
+        } else {
+          const pickedItems = logic.pickItems(inputArray, pickCount, (items) =>
+            randomizer.shuffle(items)
+          );
+          renderResultItems(pickedItems);
+
+          if (removeItemSelect.checked && inputArray.length > 0) {
+            const remainingItems = logic.getRemainingItems(
+              inputArray,
+              pickedItems,
+              true
+            );
+            textBoxEl.value = remainingItems.join("\n");
+            renderPickInput(remainingItems);
+          }
         }
       }
     };
