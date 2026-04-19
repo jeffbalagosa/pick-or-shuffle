@@ -1,15 +1,15 @@
 ## ADDED Requirements
 
-### Requirement: Pick mode SHALL present URL entries as clickable links in the input experience
-When Pick mode is active, the system SHALL provide an input presentation that preserves the current line-based list and renders recognized URL entries as clickable links.
+### Requirement: Pick mode SHALL keep a single plain-text input experience
+When Pick mode is active, the system SHALL continue to use the existing textarea input as the only visible input surface.
 
-#### Scenario: URL line is shown as a clickable link in Pick mode
-- **WHEN** the user switches to Pick mode with an input line containing an absolute `http` or `https` URL
-- **THEN** the Pick mode input experience displays that line as a clickable link
+#### Scenario: Pick mode does not show an extra input panel
+- **WHEN** the user switches to Pick mode
+- **THEN** the textarea remains the only visible input surface
 
-#### Scenario: Non-URL line remains plain text in Pick mode
-- **WHEN** the user switches to Pick mode with an input line that is not a recognized URL
-- **THEN** the Pick mode input experience displays that line as plain text instead of a link
+#### Scenario: Input remains editable plain text
+- **WHEN** the user enters URL and non-URL lines in Pick mode
+- **THEN** the input remains editable plain text
 
 ### Requirement: Pick mode SHALL render picked URL results as clickable links
 When the selected item in Pick mode is a recognized URL, the output area SHALL render the result as a clickable link instead of plain text.
@@ -27,7 +27,7 @@ The system SHALL preserve newline-delimited item parsing and remove-picked-items
 
 #### Scenario: Remove picked URL updates the remaining input list
 - **WHEN** the user enables Remove Picked Items and a URL entry is picked
-- **THEN** the picked URL is removed from the underlying Pick mode list and no longer appears in the Pick mode input experience
+- **THEN** the picked URL is removed from the underlying Pick mode textarea list
 
 #### Scenario: Shuffle mode remains unchanged
 - **WHEN** the user switches to Shuffle mode
