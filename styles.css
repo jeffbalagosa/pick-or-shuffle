@@ -51,6 +51,39 @@ p#text-area-instructions {
 
 #input-display {
   display: none;
+  background-color: white;
+  color: black;
+  padding: 0.2rem 0.5rem;
+  margin-top: 0.2rem;
+  height: 25rem;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+
+.pick-input-item {
+  padding: 0.15rem 0;
+  word-break: break-all;
+}
+
+#input-display a {
+  color: #0d6efd;
+  text-decoration: underline;
+}
+
+#input-display a:hover {
+  color: #0a58ca;
+}
+
+#output-area a {
+  color: #f9dc5c;
+  text-decoration: underline;
+}
+
+#output-area a:hover {
+  color: #fce96a;
 }
 
 #text-box {
