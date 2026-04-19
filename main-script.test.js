@@ -26,6 +26,64 @@ describe("Pick mode input behavior", () => {
     return dom.window.document;
   }
 
+  test("pick count field defaults to 1 and is visible in Pick mode", () => {
+    const document = setupDom();
+    const pickCountWrapper = document.getElementById("pickCountWrapper");
+
+    expect(pickCountWrapper).not.toBeNull();
+    expect(pickCountWrapper.style.display).not.toBe("none");
+  });
+
+  test("pick count field is hidden in Shuffle mode", () => {
+    const document = setupDom();
+    const shuffleMode = document.getElementById("shuffleMode");
+    const pickCountWrapper = document.getElementById("pickCountWrapper");
+
+    shuffleMode.checked = true;
+    shuffleMode.dispatchEvent(new document.defaultView.Event("change", { bubbles: true }));
+
+    expect(pickCountWrapper.style.display).toBe("none");
+  });
+
+  test("pick workflow renders multiple results when pick count > 1", () => {
+    const document = setupDom({
+      shuffle: (arr) => [arr[2], arr[0], arr[1]] // charlie, alpha, beta
+    });
+    const textBox = document.getElementById("text-box");
+    const pickCountInput = document.getElementById("pickCountInput");
+    const mainButton = document.getElementById("main-button");
+
+    textBox.value = "alpha\nbeta\ncharlie";
+    pickCountInput.value = "2";
+    mainButton.click();
+
+    const results = [...document.querySelectorAll("#results-list li")].map(
+      (li) => li.textContent
+    );
+    expect(results).toEqual(["charlie", "alpha"]);
+  });
+
+  test("remove multiple picked items updates textarea correctly", () => {
+    const document = setupDom({
+      shuffle: (arr) => [arr[2], arr[0], arr[1]] // charlie, alpha, beta
+    });
+    const textBox = document.getElementById("text-box");
+    const pickCountInput = document.getElementById("pickCountInput");
+    const removeItemSelect = document.getElementById("removeItemSelect");
+    const mainButton = document.getElementById("main-button");
+
+    textBox.value = "alpha\nbeta\ncharlie\ndelta";
+    pickCountInput.value = "2";
+    removeItemSelect.checked = true;
+    mainButton.click();
+
+    const results = [...document.querySelectorAll("#results-list li")].map(
+      (li) => li.textContent
+    );
+    expect(results).toEqual(["charlie", "alpha"]);
+    expect(textBox.value).toBe("beta\ndelta");
+  });
+
   test("initial mode is Pick and Shuffle is unselected", () => {
     const document = setupDom();
     const pickerMode = document.getElementById("pickerMode");

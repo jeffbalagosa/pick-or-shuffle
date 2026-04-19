@@ -1,8 +1,10 @@
 const {
   classifyResult,
   getRemainingItems,
+  normalizePickCount,
   parseItems,
   pickItem,
+  pickItems,
   shuffleItems
 } = require("./app-logic");
 
@@ -11,6 +13,33 @@ describe("core list behavior", () => {
     const text = "alpha\n\nbeta\r\n   \ncharlie";
 
     expect(parseItems(text)).toEqual(["alpha", "beta", "charlie"]);
+  });
+
+  test("normalizes pick count to positive whole numbers", () => {
+    expect(normalizePickCount(1)).toBe(1);
+    expect(normalizePickCount(5)).toBe(5);
+    expect(normalizePickCount(0)).toBe(1);
+    expect(normalizePickCount(-3)).toBe(1);
+    expect(normalizePickCount(2.5)).toBe(1);
+    expect(normalizePickCount(null)).toBe(1);
+    expect(normalizePickCount(undefined)).toBe(1);
+    expect(normalizePickCount("")).toBe(1);
+    expect(normalizePickCount("3")).toBe(3);
+    expect(normalizePickCount("invalid")).toBe(1);
+  });
+
+  test("picks multiple items without replacement using an injected shuffler", () => {
+    const items = ["alpha", "beta", "charlie", "delta"];
+    const shuffler = (list) => [list[3], list[0], list[2], list[1]]; // delta, alpha, charlie, beta
+
+    expect(pickItems(items, 2, shuffler)).toEqual(["delta", "alpha"]);
+    expect(pickItems(items, 10, shuffler)).toEqual([
+      "delta",
+      "alpha",
+      "charlie",
+      "beta"
+    ]);
+    expect(items).toEqual(["alpha", "beta", "charlie", "delta"]);
   });
 
   test("picks an item with an injected picker", () => {
@@ -31,6 +60,17 @@ describe("core list behavior", () => {
 
     expect(shuffleItems(items, shuffler)).toEqual(["charlie", "alpha", "beta"]);
     expect(items).toEqual(["alpha", "beta", "charlie"]);
+  });
+
+  test("removes multiple picked items when removal is enabled", () => {
+    const items = ["alpha", "beta", "beta", "charlie", "delta"];
+    const picked = ["beta", "delta"];
+
+    expect(getRemainingItems(items, picked, true)).toEqual([
+      "alpha",
+      "beta",
+      "charlie"
+    ]);
   });
 
   test("removes one matching picked item when removal is enabled", () => {
