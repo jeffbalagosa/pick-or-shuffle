@@ -87,6 +87,7 @@ textBoxEl.onpaste = function (e) {
 // Use event listeners on radio buttons
 pickerMode.addEventListener("change", enableCheckbox);
 shuffleMode.addEventListener("change", enableCheckbox);
+enableCheckbox();
 
 // Event Listener for button click
 mainButton.onclick = function () {
