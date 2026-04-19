@@ -3,7 +3,7 @@ const path = require("path");
 const { JSDOM } = require("jsdom");
 
 describe("Pick mode input behavior", () => {
-  function setupDom() {
+  function setupDom(chanceOverrides = {}) {
     const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
     const dom = new JSDOM(html, {
       runScripts: "outside-only",
@@ -13,8 +13,12 @@ describe("Pick mode input behavior", () => {
     // Stub Chance API used by main-script.js
     dom.window.chance = {
       shuffle: (arr) => [...arr],
-      pickone: (arr) => arr[0]
+      pickone: (arr) => arr[0],
+      ...chanceOverrides
     };
+
+    const logicScript = fs.readFileSync(path.join(__dirname, "app-logic.js"), "utf8");
+    dom.window.eval(logicScript);
 
     const script = fs.readFileSync(path.join(__dirname, "main-script.js"), "utf8");
     dom.window.eval(script);
@@ -111,5 +115,73 @@ describe("Pick mode input behavior", () => {
     pickerMode.dispatchEvent(new document.defaultView.Event("change", { bubbles: true }));
 
     expect(inputDisplay.style.display).toBe("none");
+  });
+
+  test("pick workflow renders a link for URL results", () => {
+    const document = setupDom({
+      pickone: (arr) => arr[1]
+    });
+    const textBox = document.getElementById("text-box");
+    const mainButton = document.getElementById("main-button");
+
+    textBox.value = "plain text\nhttps://example.com/path";
+    mainButton.click();
+
+    const link = document.querySelector("#results-list li a");
+    expect(link).not.toBeNull();
+    expect(link.textContent).toBe("https://example.com/path");
+    expect(link.href).toBe("https://example.com/path");
+    expect(link.target).toBe("_blank");
+    expect(link.rel).toBe("noopener noreferrer");
+  });
+
+  test("pick workflow renders non-URL results as plain text", () => {
+    const document = setupDom({
+      pickone: (arr) => arr[0]
+    });
+    const textBox = document.getElementById("text-box");
+    const mainButton = document.getElementById("main-button");
+
+    textBox.value = "plain text\nhttps://example.com/path";
+    mainButton.click();
+
+    const item = document.querySelector("#results-list li");
+    expect(item.textContent).toBe("plain text");
+    expect(item.querySelector("a")).toBeNull();
+  });
+
+  test("shuffle workflow renders shuffled line-based input", () => {
+    const document = setupDom({
+      shuffle: (arr) => [arr[2], arr[0], arr[1]]
+    });
+    const shuffleMode = document.getElementById("shuffleMode");
+    const textBox = document.getElementById("text-box");
+    const mainButton = document.getElementById("main-button");
+
+    shuffleMode.checked = true;
+    shuffleMode.dispatchEvent(new document.defaultView.Event("change", { bubbles: true }));
+    textBox.value = "alpha\nbeta\ncharlie";
+    mainButton.click();
+
+    const items = [...document.querySelectorAll("#results-list li")].map(
+      (item) => item.textContent
+    );
+    expect(items).toEqual(["charlie", "alpha", "beta"]);
+  });
+
+  test("remove picked items workflow updates textarea with remaining items", () => {
+    const document = setupDom({
+      pickone: (arr) => arr[1]
+    });
+    const textBox = document.getElementById("text-box");
+    const removeItemSelect = document.getElementById("removeItemSelect");
+    const mainButton = document.getElementById("main-button");
+
+    textBox.value = "alpha\nbeta\nbeta\ncharlie";
+    removeItemSelect.checked = true;
+    mainButton.click();
+
+    expect(document.querySelector("#results-list li").textContent).toBe("beta");
+    expect(textBox.value).toBe("alpha\nbeta\ncharlie");
   });
 });
