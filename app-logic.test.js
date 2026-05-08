@@ -5,6 +5,7 @@ const {
   parseItems,
   pickItem,
   pickItems,
+  splitIntoLinkSegments,
   shuffleItems
 } = require("./app-logic");
 
@@ -115,5 +116,20 @@ describe("core list behavior", () => {
       text: "/relative/path",
       isLinkable: false
     });
+  });
+
+  test("splits mixed text and URLs into renderable segments", () => {
+    expect(
+      splitIntoLinkSegments("NOW Foods Official Website - https://www.nowfoods.com")
+    ).toEqual([
+      {
+        text: "NOW Foods Official Website - ",
+        isLink: false
+      },
+      {
+        text: "https://www.nowfoods.com",
+        isLink: true
+      }
+    ]);
   });
 });

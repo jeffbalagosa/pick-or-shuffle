@@ -28,18 +28,21 @@
 
     function createResultNode(item, tagName) {
       const element = document.createElement(tagName);
-      const result = logic.classifyResult(item);
+      const segments = logic.splitIntoLinkSegments(item);
 
-      if (result.isLinkable) {
-        const link = document.createElement("a");
-        link.href = result.text;
-        link.textContent = result.text;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        element.appendChild(link);
-      } else {
-        element.textContent = result.text;
-      }
+      segments.forEach((segment) => {
+        if (segment.isLink) {
+          const link = document.createElement("a");
+          link.href = segment.text;
+          link.textContent = segment.text;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          element.appendChild(link);
+          return;
+        }
+
+        element.appendChild(document.createTextNode(segment.text));
+      });
 
       return element;
     }

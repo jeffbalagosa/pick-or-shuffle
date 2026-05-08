@@ -69,6 +69,49 @@
     };
   }
 
+  function splitIntoLinkSegments(item) {
+    const text = String(item);
+    const urlPattern = /(https?:\/\/[^\s]+)/g;
+    const segments = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = urlPattern.exec(text)) !== null) {
+      const [candidate] = match;
+      const startIndex = match.index;
+
+      if (startIndex > lastIndex) {
+        segments.push({
+          text: text.slice(lastIndex, startIndex),
+          isLink: false
+        });
+      }
+
+      segments.push({
+        text: candidate,
+        isLink: isHttpUrl(candidate)
+      });
+
+      lastIndex = startIndex + candidate.length;
+    }
+
+    if (lastIndex < text.length) {
+      segments.push({
+        text: text.slice(lastIndex),
+        isLink: false
+      });
+    }
+
+    if (segments.length === 0) {
+      segments.push({
+        text,
+        isLink: false
+      });
+    }
+
+    return segments;
+  }
+
   return {
     classifyResult,
     getRemainingItems,
@@ -77,6 +120,7 @@
     parseItems,
     pickItem,
     pickItems,
+    splitIntoLinkSegments,
     shuffleItems
   };
 });
