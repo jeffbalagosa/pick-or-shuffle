@@ -231,6 +231,28 @@ describe("Pick mode input behavior", () => {
     expect(item.firstChild.textContent).toBe("NOW Foods Official Website - ");
   });
 
+  test("pick workflow renders URL-first line with trailing description", () => {
+    const document = setupDom({
+      pickone: (arr) => arr[0]
+    });
+    const textBox = document.getElementById("text-box");
+    const mainButton = document.getElementById("main-button");
+
+    textBox.value = "https://www.somerandomlink.com - some description";
+    mainButton.click();
+
+    const item = document.querySelector("#results-list li");
+    const link = item.querySelector("a");
+
+    expect(item.textContent).toBe(
+      "https://www.somerandomlink.com - some description"
+    );
+    expect(link).not.toBeNull();
+    expect(link.textContent).toBe("https://www.somerandomlink.com");
+    expect(link.href).toBe("https://www.somerandomlink.com/");
+    expect(item.lastChild.textContent).toBe(" - some description");
+  });
+
   test("shuffle workflow renders shuffled line-based input", () => {
     const document = setupDom({
       shuffle: (arr) => [arr[2], arr[0], arr[1]]
